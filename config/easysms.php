@@ -1,8 +1,7 @@
 <?php
-
 return [
     // HTTP 请求的超时时间（秒）
-    'timeout' => 10.0,
+    'timeout' => 5.0,
 
     // 默认发送配置
     'default' => [
@@ -11,7 +10,7 @@ return [
 
         // 默认可用的发送网关
         'gateways' => [
-            'aliyun',
+            'yunpian',
         ],
     ],
     // 可用的网关配置
@@ -19,10 +18,8 @@ return [
         'errorlog' => [
             'file' => '/tmp/easy-sms.log',
         ],
-        'aliyun' => [
-            'access_key_id' => env('SMS_ALIYUN_ACCESS_KEY_ID'),
-            'access_key_secret' => env('SMS_ALIYUN_ACCESS_KEY_SECRET'),
-            'sign_name' => 'Larabbs',
+        'yunpian' => [
+            'api_key' => env('YUNPIAN_API_KEY'),
         ],
     ],
 ];
