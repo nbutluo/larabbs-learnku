@@ -31,6 +31,6 @@ class AppServiceProvider extends ServiceProvider
         \App\Models\Topic::observe(\App\Observers\TopicObserver::class);
         \App\Models\Link::observe(\App\Observers\LinkObserver::class);
         // 返回的数据去掉 data 这一层包裹
-        JsonResource::withoutWrapping();
+        // JsonResource::withoutWrapping();
     }
 }
