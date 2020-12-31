@@ -10,6 +10,16 @@ use Illuminate\Auth\AuthenticationException;
 
 class UsersController extends Controller
 {
+    public function show(User $user, Request $request)
+    {
+        return new UserResource($user);
+    }
+
+    public function me(Request $request)
+    {
+        return (new UserResource($request->user()))->showSensitiveFields();
+    }
+
     public function store(UserRequest $request)
     {
         $verifyData = \Cache::get($request->verification_key);
@@ -32,6 +42,6 @@ class UsersController extends Controller
         // 清除验证码缓存
         \Cache::forget($request->verification_key);
 
-        return new UserResource($user);
+        return (new UserResource($user))->showSensitiveFields();
     }
 }
