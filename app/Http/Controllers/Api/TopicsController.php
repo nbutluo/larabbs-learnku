@@ -29,4 +29,13 @@ class TopicsController extends Controller
 
     public function show()
     { }
+
+    public function destroy(Topic $topic)
+    {
+        $this->authorize('destroy', $topic);
+
+        $topic->delete();
+
+        return response(null, 204);
+    }
 }
