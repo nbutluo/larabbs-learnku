@@ -52,14 +52,12 @@ class UsersController extends Controller
         return (new UserResource($user))->showSensitiveFields();
     }
 
-    public function update(UserRequest $requst)
+    public function update(UserRequest $request)
     {
-        $user = $requst->user();
-
-        $attributes = $requst->only(['name', 'email', 'introduction']);
-
-        if ($requst->avatar_image_id) {
-            $image = Image::find($requst->avatar_image_id);
+        $user = $request->user();
+        $attributes = $request->only(['name', 'email', 'introduction', 'registration_id']);
+        if ($request->avatar_image_id) {
+            $image = Image::find($request->avatar_image_id);
 
             $attributes['avatar'] =  $image->path;
         }
