@@ -64,6 +64,10 @@ Route::prefix('v1')->namespace('Api')
                 Route::get('categories', 'CategoriesController@index')->name('categories.index');
                 // 某个用户发布的话题
                 Route::get('users/{user}/topics', 'TopicsController@userIndex')->name('users.topics.index');
+                // 资源推荐
+                Route::get('links', 'LinksController@index')->name('links.index');
+                // 活跃用户
+                Route::get('actived/users', 'UsersController@activedIndex')->name('actived.users.index');
 
                 // 登录后可以访问的接口
                 Route::middleware('auth:api')->group(function () {

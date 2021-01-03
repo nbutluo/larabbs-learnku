@@ -11,6 +11,12 @@ use Illuminate\Auth\AuthenticationException;
 
 class UsersController extends Controller
 {
+    public function activedIndex(User $user)
+    {
+        UserResource::wrap('data');
+        return UserResource::collection($user->getActiveUsers());
+    }
+
     public function show(User $user, Request $request)
     {
         return new UserResource($user);
