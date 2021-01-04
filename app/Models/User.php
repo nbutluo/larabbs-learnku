@@ -9,10 +9,12 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Auth\MustVerifyEmail as MustVerifyEmailTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
+use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable implements MustVerifyEmailContract, JWTSubject
 {
     use Traits\LastActivedAtHelper;
+    use HasApiTokens;
 
     use HasRoles;
     use MustVerifyEmailTrait;
@@ -103,5 +105,14 @@ class User extends Authenticatable implements MustVerifyEmailContract, JWTSubjec
         }
 
         $this->attributes['avatar'] = $path;
+    }
+
+    // 支持手机登录
+    public function findForPassport($username)
+    {
+        filter_var($username, FILTER_VALIDATE_EMAIL) ?
+            $credentials['email'] = $username : $credentials['phone'] = $username;
+
+        return self::where($credentials)->first();
     }
 }
